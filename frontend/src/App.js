@@ -15,6 +15,7 @@ import RegisterScreen from './screens/RegisterScreen';
 import ShippingAddressScreen from './screens/ShippingAddressScreen';
 import SigninScreen from './screens/SigninScreen';
 
+
 function App() {
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
@@ -25,7 +26,6 @@ function App() {
     dispatch(signout());
   };
   return (
-    
     <div className="grid-container">
       <header className="row">
         <div>
@@ -87,6 +87,7 @@ function App() {
       </header>
       <main> 
         <Routes>
+          <Route path="/cart" element={<CartScreen/>}></Route>
           <Route path="/cart/:id?" element={<CartScreen/>}></Route>
           <Route path="/product/:id" element={<ProductScreen/>}></Route>
           <Route path="/signin" element={<SigninScreen/>}></Route>
@@ -95,14 +96,13 @@ function App() {
           <Route path="/placeorder" element={<PlaceOrderScreen/>}></Route>
           <Route path="/order/:id" element={<OrderScreen/>}></Route>
           <Route path="/orderhistory" element={<OrderHistoryScreen/>}></Route>
-          <PrivateRoute path="/profile" element={<ProfileScreen/>}></PrivateRoute>
-          <Route path="/" element={<HomeScreen/>} exact></Route>
+          <Route path="/profile" element={<PrivateRoute><ProfileScreen/></PrivateRoute>}></Route>
+          <Route path="/" element={<HomeScreen/>}></Route>
           <Route path="/shipping" element={<ShippingAddressScreen/>}></Route>
         </Routes>
       </main>
       <footer className="row center">All right reserved</footer>
     </div>
-  
   );
 }
 

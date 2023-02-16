@@ -17,7 +17,6 @@ const data = {
   ],
     products: [
       {
-        _id: '1',
         name: 'Blueberries',
         category: 'Fruit',
         image: '/images/p1.jpg',
@@ -29,7 +28,6 @@ const data = {
         description: 'The freshest blueberries this side of the Mississippi',
       },
       {
-        _id: '2',
         name: 'Oranges',
         category: 'Fruit',
         image: '/images/p2.jpg',
@@ -41,7 +39,6 @@ const data = {
         description: 'Mouth watering oranges',
       },
       {
-        _id: '3',
         name: 'Limes',
         category: 'Fruit',
         image: '/images/p3.jpg',
@@ -53,7 +50,6 @@ const data = {
         description: 'Delightful limes',
       },
       {
-        _id: '4',
         name: 'Watermelon',
         category: 'Fruit',
         image: '/images/p4.jpg',
@@ -65,7 +61,6 @@ const data = {
         description: 'The perfect watermelon for you next party',
       },
       {
-        _id: '5',
         name: 'Lettuce',
         category: 'Vegetable',
         image: '/images/p5.jpg',
@@ -77,7 +72,6 @@ const data = {
         description: 'Fresh lettuce',
       },
       {
-        _id: '6',
         name: 'Pears',
         category: 'Fruit',
         image: '/images/p6.jpg',

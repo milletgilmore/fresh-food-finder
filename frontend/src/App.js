@@ -14,6 +14,9 @@ import ProfileScreen from './screens/ProfileScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import ShippingAddressScreen from './screens/ShippingAddressScreen';
 import SigninScreen from './screens/SigninScreen';
+//import ProtectedRoute from './components/ProtectedRoute';
+//import DashboardScreen from './screens/DashboardScreen';
+//import AdminRoute from './components/AdminRoute';
 
 
 function App() {

@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import productRouter from './routers/productRouter.js';
 import userRouter from './routers/userRouter.js';
 import orderRouter from './routers/orderRouter.js';
+import seedRouter from './routers/seedRouter.js';
 
 dotenv.config();
 
@@ -17,14 +18,10 @@ mongoose
   });
 
 const app = express();
+app.use('/api/seed', seedRouter);
+app.use('/api/products', productRouter);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-/*mongoose.connect(process.env.MONGODB_URL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  createIndexes: true,
-});*/
 
 app.use('/api/users', userRouter);
 app.use('/api/products', productRouter);
@@ -42,8 +39,9 @@ app.get("*", (req, res) =>
 app.use((err, req, res, next) => {
   res.status(500).send({ message: err.message });
 });
+app.use('/api/products', productRouter);
 
-const port = process.env.PORT || 3002;
+const port = process.env.PORT || 3001;
 app.listen(port, () => {
   console.log(`Serve at http://localhost:${port}`);
 });

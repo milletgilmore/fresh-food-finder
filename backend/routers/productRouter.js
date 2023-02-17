@@ -1,37 +1,52 @@
 import express from 'express';
-import expressAsyncHandler from 'express-async-handler';
-import data from '../data.js';
 import Product from '../models/productModel.js';
+import { isAuth, isAdmin } from '../utils.js';
+import expressAsyncHandler from 'express-async-handler';
 
 const productRouter = express.Router();
 
-productRouter.get(
-  '/',
-  expressAsyncHandler(async (req, res) => {
-    const products = await Product.find({});
+productRouter.get('/', async (req, res) => {
+    const products = await Product.find();
     res.send(products);
   })
-);
-
-productRouter.get(
-  '/seed',
+;
+productRouter.post(
+  '/',
+  isAuth,
+  isAdmin,
   expressAsyncHandler(async (req, res) => {
-    // await Product.remove({});
-    const createdProducts = await Product.insertMany(data.products);
-    res.send({ createdProducts });
+    const newProduct = new Product({
+      name: 'apple' + Date.now(),
+      slug: 'apple' + Date.now(),
+      image: '/images/p1.jpg',
+      price: 0,
+      category: 'fruit',
+      zipcode: '78749',
+      countInStock: 0,
+      rating: 0,
+      numReviews: 0,
+      description: 'pink lady apples',
+    });
+    const product = await newProduct.save();
+    res.send({ message: 'Product Created', product });
   })
 );
 
-productRouter.get(
-  '/:id',
-  expressAsyncHandler(async (req, res) => {
-    const product = await Product.findById(req.params.id);
-    if (product) {
-      res.send(product);
-    } else {
-      res.status(404).send({ message: 'Product Not Found' });
-    }
-  })
-);
+productRouter.get('/slug/:slug', async (req, res) => {
+  const product = await Product.findOne({ slug: req.params.slug });
+  if (product) {
+    res.send(product);
+  } else {
+    res.status(404).send({ message: 'Product Not Found' });
+  }
+});
+productRouter.get('/:id', async (req, res) => {
+  const product = await Product.findById(req.params.id);
+  if (product) {
+    res.send(product);
+  } else {
+    res.status(404).send({ message: 'Product Not Found' });
+  }
+});
 
 export default productRouter;
